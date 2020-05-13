@@ -123,7 +123,7 @@ void keyboardUp(unsigned char key, int x, int y)
 	case '-':
 		action.decrease_light = FALSE;
 		break;
-	case 'n':
+	case 'm':
 		action.move_katona = FALSE;
 		movingWhichkatona = 0;
 		break;
