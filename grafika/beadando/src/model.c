@@ -6,10 +6,15 @@
 
 #include "model.h"
 
+
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <obj/load.h>
+#include <obj/draw.h>
+
+
 
 #define LINE_BUFFER_SIZE 1024
 
@@ -101,7 +106,7 @@ void free_tokens(struct TokenArray* token_array)
 	free(token_array->tokens);
 }
 
-int load_model(const char* filename, Model* model)
+/*int load_model(const char* filename, Model* model)
 {
     FILE* obj_file = fopen(filename, "r");
     if (obj_file == NULL) {
@@ -113,7 +118,7 @@ int load_model(const char* filename, Model* model)
 	read_elements(obj_file, model);
 
 	return TRUE;
-}
+}*/
 
 void print_model_info(const struct Model* model)
 {
@@ -121,19 +126,19 @@ void print_model_info(const struct Model* model)
     printf("Texture vertices: %d\n", model->n_texture_vertices);
     printf("Normals: %d\n", model->n_normals);
     printf("Triangles: %d\n", model->n_triangles);
-    printf("Quads: %d\n", model->n_quads);
+   /* printf("Quads: %d\n", model->n_quads);*/
 }
 
-void free_model(struct Model* model)
+/*void free_model(struct Model* model)
 {
     free(model->vertices);
     free(model->texture_vertices);
     free(model->normals);
     free(model->triangles);
     free(model->quads);
-}
+}*/
 
-void count_elements(FILE* file, struct Model* model)
+/*void count_elements(FILE* file, struct Model* model)
 {
     char line[LINE_BUFFER_SIZE];
 
@@ -142,9 +147,9 @@ void count_elements(FILE* file, struct Model* model)
         clear_comment(line);
         count_element_in_line(line, model);
     }
-}
+}*/
 
-void read_elements(FILE* file, struct Model* model)
+/*void read_elements(FILE* file, struct Model* model)
 {
     char line[LINE_BUFFER_SIZE];
 
@@ -158,16 +163,16 @@ void read_elements(FILE* file, struct Model* model)
         clear_comment(line);
         read_element_from_line(line, model);
     }
-}
+}*/
 
-void init_model_counters(Model* model)
+/*void init_model_counters(Model* model)
 {
     model->n_vertices = 0;
     model->n_texture_vertices = 0;
     model->n_normals = 0;
     model->n_triangles = 0;
     model->n_quads = 0;
-}
+}*/
 
 void clear_comment(char* line)
 {
@@ -181,7 +186,7 @@ void clear_comment(char* line)
     }
 }
 
-void count_element_in_line(const char* line, Model* model)
+/*void count_element_in_line(const char* line, Model* model)
 {
 	struct TokenArray token_array;
 	char* first_token;
@@ -213,9 +218,9 @@ void count_element_in_line(const char* line, Model* model)
 	}
 
     free_tokens(&token_array);
-}
+}*/
 
-void read_element_from_line(const char* line, Model* model)
+/*void read_element_from_line(const char* line, Model* model)
 {
 	struct TokenArray token_array;
 	char* first_token;
@@ -259,45 +264,45 @@ void read_element_from_line(const char* line, Model* model)
 	}
 
 	free_tokens(&token_array);
-}
+}*/
 
-void create_arrays(struct Model* model)
+/*void create_arrays(struct Model* model)
 {
     model->vertices = (struct Vertex*)malloc((model->n_vertices + 1) * sizeof(struct Vertex));
     model->texture_vertices = (struct TextureVertex*)malloc((model->n_texture_vertices + 1) * sizeof(struct TextureVertex));
     model->normals = (struct Vertex*)malloc((model->n_normals + 1) * sizeof(struct Vertex));
     model->triangles = (struct Triangle*)malloc(model->n_triangles * sizeof(struct Triangle));
     model->quads = (struct Quad*)malloc(model->n_quads * sizeof(struct Quad));
-}
+}*/
 
-void read_vertex(const struct TokenArray* token_array, struct Vertex* vertex)
+/*void read_vertex(const struct TokenArray* token_array, struct Vertex* vertex)
 {
     vertex->x = atof(token_array->tokens[1]);
     vertex->y = atof(token_array->tokens[2]);
     vertex->z = atof(token_array->tokens[3]);
-}
+}*/
 
-void read_texture_vertex(const struct TokenArray* token_array, struct TextureVertex* texture_vertex)
+/*void read_texture_vertex(const struct TokenArray* token_array, struct TextureVertex* texture_vertex)
 {
     texture_vertex->u = atof(token_array->tokens[1]);
     texture_vertex->v = atof(token_array->tokens[2]);
-}
+}*/
 
-void read_normal(const struct TokenArray* token_array, struct Vertex* normal)
+/*void read_normal(const struct TokenArray* token_array, struct Vertex* normal)
 {
     normal->x = atof(token_array->tokens[1]);
     normal->y = atof(token_array->tokens[2]);
     normal->z = atof(token_array->tokens[3]);
-}
+}*/
 
-void read_triangle(const struct TokenArray* token_array, struct Triangle* triangle)
+/*void read_triangle(const struct TokenArray* token_array, struct Triangle* triangle)
 {
     int i;
 
     for (i = 0; i < 3; ++i) {
         read_face_point(token_array->tokens[i + 1], &triangle->points[i]);
     }
-}
+}*/
 
 void read_quad(const struct TokenArray* token_array, struct Quad* quad)
 {
@@ -538,33 +543,39 @@ GLuint load_texture(const char* filename) {
 
 void init_entities(World* world) {
 	// Katona1
-	load_model("models//katona1.obj", &world->katona1.model);
+	/*load_model("models//katona1.obj", &world->katona1.model);*/
+	load_model(&(world->katona1), "models//katona1.obj");
 	world->katona1.texture = load_texture("textures//terep.png");
 	init_object(&world->katona1, 120, 170);
 
 	// Katona2
-	load_model("models//katona1.obj", &world->katona2.model);
+	//load_model("models//katona1.obj", &world->katona2.model);//
+	load_model(&(world->katona2), "models//katona1.obj");
 	world->katona2.texture = load_texture("textures//terep.png");
 	init_object(&world->katona2, -120, 170);
 
 	// katona3
-	load_model("models//katona3.obj", &world->katona3.model);
+	//load_model("models//katona3.obj", &world->katona3.model);
+	load_model(&(world->katona3), "models//katona3.obj");
 	world->katona3.texture = load_texture("textures//terep.png");
 	init_object(&world->katona3, -120, -170);
 
 	// katona4
-	load_model("models//katona3.obj", &world->katona4.model);
+	//load_model("models//katona3.obj", &world->katona4.model);
+	load_model(&(world->katona4), "models//katona3.obj");
 	world->katona4.texture = load_texture("textures//terep.png");
 	init_object(&world->katona4, 120, -170);
 
 	// Table
-	load_model("models//table.obj", &world->table.model);
+	//load_model("models//table.obj", &world->table.model);
+	load_model(&(world->table), "models//table.obj");
 	world->table.texture = load_texture("textures//table.png");
 	init_object(&world->table, 0, 0);
 
 
 	// szek1
-	load_model("models//szek.obj", &world->szek.model);
+	//load_model("models//szek.obj", &world->szek.model);
+	load_model(&(world->szek), "models//szek.obj");
 	world->szek.texture = load_texture("textures//chair.png");
 	init_object(&world->szek, -25, 170);
 

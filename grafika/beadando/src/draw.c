@@ -208,7 +208,7 @@ void draw_walls(Room room) {
 	glEnd();
 }
 
-void draw_triangles(const struct Model* model)
+/*void draw_triangles(const struct Model* model)
 {
 	int i, k;
 	int vertex_index, texture_index, normal_index;
@@ -245,10 +245,10 @@ void draw_triangles(const struct Model* model)
 	}
 
 	glEnd();
-}
+}*/
 
 
-void draw_quads(const struct Model* model)
+/*void draw_quads(const struct Model* model)
 {
     int i, k;
     int vertex_index, texture_index, normal_index;
@@ -274,7 +274,7 @@ void draw_quads(const struct Model* model)
     }
 
     glEnd();
-}
+}*/
 
 void draw_normals(const struct Model* model, double length)
 {
@@ -298,11 +298,11 @@ void draw_normals(const struct Model* model, double length)
 	glEnd();
 }
 
-void draw_model(const struct Model* model)
+/*void draw_model(const struct Model* model)
 {
 	draw_triangles(model);
 	draw_quads(model);
-}
+}*/
 
 void draw_help(int texture) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

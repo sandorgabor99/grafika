@@ -30,7 +30,7 @@ void draw_walls(Room room);
 /**
 * Draw the model.
 */
-void draw_model(const struct Model* model);
+/*void draw_model(const struct Model* model);*/
 
 /*
 * Draws the help menu
