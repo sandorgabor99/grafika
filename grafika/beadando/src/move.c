@@ -36,9 +36,7 @@ void move_katona(World* world) {
 						{
 					world->katona1.position.x = camera.position.x + 0.5;
 					world->katona1.position.z = camera.position.z + 0.5;
-					world->katona1.material_ambient[0] = camera.position.x / 100;
-					world->katona1.material_ambient[1] = camera.position.y / 100;
-					world->katona1.material_ambient[2] = camera.position.z / 100;
+					
 					
 					
 
@@ -46,6 +44,9 @@ void move_katona(World* world) {
 					else {
 					world->katona1.position.x = 130;
 					world->katona1.position.z = 170;
+					world->katona1.material_ambient[0] = camera.position.x / 100;
+					world->katona1.material_ambient[1] = camera.position.y / 100;
+					world->katona1.material_ambient[2] = camera.position.z / 100;
 					
 					}
 				}
@@ -57,14 +58,16 @@ void move_katona(World* world) {
 						{
 					world->katona2.position.x = camera.position.x + 0.5;
 					world->katona2.position.z = camera.position.z + 0.5;
-					world->katona2.material_ambient[0] = camera.position.x / 100;
-					world->katona2.material_ambient[1] = camera.position.y / 100;
-					world->katona2.material_ambient[2] = camera.position.z / 100;
+					
+					
 
 					}
 					else {
 					world->katona2.position.x = -130;
 					world->katona2.position.z = 170;
+					world->katona2.material_ambient[0] = camera.position.x / 100;
+					world->katona2.material_ambient[1] = camera.position.y / 100;
+					world->katona2.material_ambient[2] = camera.position.z / 100;
 					}
 					
 				}
